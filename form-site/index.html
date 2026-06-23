@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Velo — Get started</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <header class="top-bar">
+    <span class="logo">Velo</span>
+    <span class="step-counter" id="stepCounter">1 of 12</span>
+  </header>
+
+  <main class="form-container">
+
+    <!-- Step 1: First name -->
+    <section class="step active" id="step-1" data-step="1">
+      <span class="ghost-number">01</span>
+      <div class="step-body">
+        <h1 class="question">What's your<br>first name?</h1>
+        <div class="input-group">
+          <input type="text" id="firstName" class="text-input" placeholder="Jane" autocomplete="given-name">
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-back" onclick="goBack()">← Back</button>
+        <button class="btn-continue" onclick="goNext()">Continue →</button>
+      </div>
+    </section>
+
+    <!-- Step 2: Last name -->
+    <section class="step" id="step-2" data-step="2">
+      <span class="ghost-number">02</span>
+      <div class="step-body">
+        <h1 class="question">And your<br>last name?</h1>
+        <div class="input-group">
+          <input type="text" id="lastName" class="text-input" placeholder="Smith" autocomplete="family-name">
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-back" onclick="goBack()">← Back</button>
+        <button class="btn-continue" onclick="goNext()">Continue →</button>
+      </div>
+    </section>
+
+    <!-- Step 3: Phone -->
+    <section class="step" id="step-3" data-step="3">
+      <span class="ghost-number">03</span>
+      <div class="step-body">
+        <h1 class="question">What's your<br>phone number?</h1>
+        <div class="input-group">
+          <input type="tel" id="phone" class="text-input" placeholder="+1 (555) 000-0000" autocomplete="tel">
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-back" onclick="goBack()">← Back</button>
+        <button class="btn-continue" onclick="goNext()">Continue →</button>
+      </div>
+    </section>
+
+    <!-- Step 4: Company -->
+    <section class="step" id="step-4" data-step="4">
+      <span class="ghost-number">04</span>
+      <div class="step-body">
+        <h1 class="question">What's the name<br>of your company?</h1>
+        <div class="input-group">
+          <input type="text" id="company" class="text-input" placeholder="Acme Inc." autocomplete="organization">
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-back" onclick="goBack()">← Back</button>
+        <button class="btn-continue" onclick="goNext()">Continue →</button>
+      </div>
+    </section>
+
+    <!-- Step 5: Role -->
+    <section class="step" id="step-5" data-step="5">
+      <span class="ghost-number">05</span>
+      <div class="step-body">
+        <h1 class="question">What's<br>your role?</h1>
+        <div class="choices" id="choices-5">
+          <button class="choice" data-value="founder">Founder</button>
+          <button class="choice" data-value="developer">Developer</button>
+          <button class="choice" data-value="designer">Designer</button>
+          <button class="choice" data-value="marketer">Marketer</button>
+          <button class="choice" data-value="other">Other</button>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-back" onclick="goBack()">← Back</button>
+        <button class="btn-continue" onclick="goNext()">Continue →</button>
+      </div>
+    </section>
+
+    <!-- Step 6: Team size -->
+    <section class="step" id="step-6" data-step="6">
+      <span class="ghost-number">06</span>
+      <div class="step-body">
+        <h1 class="question">How big is<br>your team?</h1>
+        <div class="choices" id="choices-6">
+          <button class="choice" data-value="just-me">Just me</button>
+          <button class="choice" data-value="2-10">2–10</button>
+          <button class="choice" data-value="11-50">11–50</button>
+          <button class="choice" data-value="50+">50+</button>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-back" onclick="goBack()">← Back</button>
+        <button class="btn-continue" onclick="goNext()">Continue →</button>
+      </div>
+    </section>
+
+    <!-- Step 7: Challenge -->
+    <section class="step" id="step-7" data-step="7">
+      <span class="ghost-number">07</span>
+      <div class="step-body">
+        <h1 class="question">What's your biggest<br>challenge right now?</h1>
+        <div class="choices" id="choices-7">
+          <button class="choice" data-value="speed">Speed</button>
+          <button class="choice" data-value="collaboration">Collaboration</button>
+          <button class="choice" data-value="planning">Planning</button>
+          <button class="choice" data-value="focus">Focus</button>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-back" onclick="goBack()">← Back</button>
+        <button class="btn-continue" onclick="goNext()">Continue →</button>
+      </div>
+    </section>
+
+    <!-- Step 8: Goals (multi-select chips) -->
+    <section class="step" id="step-8" data-step="8">
+      <span class="ghost-number">08</span>
+      <div class="step-body">
+        <h1 class="question">What are your main<br>goals with Velo?</h1>
+        <p class="sub-label">Pick as many as you like.</p>
+        <div class="chips" id="chips-8">
+          <button class="chip" data-value="ship-faster">Ship faster</button>
+          <button class="chip" data-value="cut-meetings">Cut meetings</button>
+          <button class="chip" data-value="automate">Automate busywork</button>
+          <button class="chip" data-value="stay-focused">Stay focused</button>
+          <button class="chip" data-value="align-team">Align the team</button>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-back" onclick="goBack()">← Back</button>
+        <button class="btn-continue" onclick="goNext()">Continue →</button>
+      </div>
+    </section>
+
+    <!-- Step 9: Referral -->
+    <section class="step" id="step-9" data-step="9">
+      <span class="ghost-number">09</span>
+      <div class="step-body">
+        <h1 class="question">How did you<br>hear about us?</h1>
+        <div class="choices" id="choices-9">
+          <button class="choice" data-value="twitter">Twitter / X</button>
+          <button class="choice" data-value="word-of-mouth">Word of mouth</button>
+          <button class="choice" data-value="search">Search</button>
+          <button class="choice" data-value="newsletter">Newsletter</button>
+          <button class="choice" data-value="other">Other</button>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-back" onclick="goBack()">← Back</button>
+        <button class="btn-continue" onclick="goNext()">Continue →</button>
+      </div>
+    </section>
+
+    <!-- Step 10: Tools (multi-select chips) -->
+    <section class="step" id="step-10" data-step="10">
+      <span class="ghost-number">10</span>
+      <div class="step-body">
+        <h1 class="question">Which tools do<br>you currently use?</h1>
+        <p class="sub-label">Pick as many as you like.</p>
+        <div class="chips" id="chips-10">
+          <button class="chip" data-value="notion">Notion</button>
+          <button class="chip" data-value="slack">Slack</button>
+          <button class="chip" data-value="jira">Jira</button>
+          <button class="chip" data-value="linear">Linear</button>
+          <button class="chip" data-value="figma">Figma</button>
+          <button class="chip" data-value="google-docs">Google Docs</button>
+          <button class="chip" data-value="other">Other</button>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-back" onclick="goBack()">← Back</button>
+        <button class="btn-continue" onclick="goNext()">Continue →</button>
+      </div>
+    </section>
+
+    <!-- Step 11: Timeline -->
+    <section class="step" id="step-11" data-step="11">
+      <span class="ghost-number">11</span>
+      <div class="step-body">
+        <h1 class="question">How soon do you want<br>to get started?</h1>
+        <div class="choices" id="choices-11">
+          <button class="choice" data-value="today">Today</button>
+          <button class="choice" data-value="this-week">This week</button>
+          <button class="choice" data-value="exploring">Just exploring</button>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-back" onclick="goBack()">← Back</button>
+        <button class="btn-continue" onclick="goNext()">Continue →</button>
+      </div>
+    </section>
+
+    <!-- Step 12: Feature -->
+    <section class="step" id="step-12" data-step="12">
+      <span class="ghost-number">12</span>
+      <div class="step-body">
+        <h1 class="question">What feature<br>excites you most?</h1>
+        <div class="choices" id="choices-12">
+          <button class="choice" data-value="ai-writing">AI writing assist</button>
+          <button class="choice" data-value="scheduling">Smart scheduling</button>
+          <button class="choice" data-value="summaries">Auto-summaries</button>
+          <button class="choice" data-value="workflow">Workflow builder</button>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-back" onclick="goBack()">← Back</button>
+        <button class="btn-continue" onclick="goNext()">Continue →</button>
+      </div>
+    </section>
+
+    <!-- Thank-you screen -->
+    <section class="step" id="step-thanks">
+      <div class="step-body thanks-body">
+        <p class="thanks-logo">Velo</p>
+        <h1 class="thanks-headline">You're in.</h1>
+        <p class="thanks-sub" id="thanksMessage">Welcome to Velo. We'll be in touch.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
