@@ -45,19 +45,24 @@ function restoreAnswers(n) {
 function goTo(n, dir) {
   const outEl = getStepEl(currentStep);
   const inEl  = getStepEl(n);
-  const outClass = dir === 'forward' ? 'slide-out-forward'  : 'slide-out-backward';
-  const inClass  = dir === 'forward' ? 'slide-in-forward'   : 'slide-in-backward';
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  outEl.classList.add(outClass);
-  outEl.addEventListener('animationend', () => {
-    outEl.classList.remove('active', outClass);
-  }, { once: true });
+  if (reducedMotion) {
+    outEl.classList.remove('active');
+  } else {
+    const outClass = dir === 'forward' ? 'slide-out-forward'  : 'slide-out-backward';
+    const inClass  = dir === 'forward' ? 'slide-in-forward'   : 'slide-in-backward';
+    outEl.classList.add(outClass);
+    outEl.addEventListener('animationend', () => {
+      outEl.classList.remove('active', outClass);
+    }, { once: true });
+    inEl.classList.add(inClass);
+    inEl.addEventListener('animationend', () => {
+      inEl.classList.remove(inClass);
+    }, { once: true });
+  }
 
-  inEl.classList.add('active', inClass);
-  inEl.addEventListener('animationend', () => {
-    inEl.classList.remove(inClass);
-  }, { once: true });
-
+  inEl.classList.add('active');
   currentStep = n;
   updateUI(n);
   restoreAnswers(n);
@@ -103,14 +108,22 @@ function shake(el) {
 function showThanks() {
   const outEl = getStepEl(currentStep);
   const inEl  = getStepEl('thanks');
-  outEl.classList.add('slide-out-forward');
-  outEl.addEventListener('animationend', () => {
-    outEl.classList.remove('active', 'slide-out-forward');
-  }, { once: true });
-  inEl.classList.add('active', 'slide-in-forward');
-  inEl.addEventListener('animationend', () => {
-    inEl.classList.remove('slide-in-forward');
-  }, { once: true });
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reducedMotion) {
+    outEl.classList.remove('active');
+  } else {
+    outEl.classList.add('slide-out-forward');
+    outEl.addEventListener('animationend', () => {
+      outEl.classList.remove('active', 'slide-out-forward');
+    }, { once: true });
+    inEl.classList.add('slide-in-forward');
+    inEl.addEventListener('animationend', () => {
+      inEl.classList.remove('slide-in-forward');
+    }, { once: true });
+  }
+
+  inEl.classList.add('active');
   document.getElementById('progressFill').style.width = '100%';
   document.getElementById('stepCounter').textContent = '';
   document.getElementById('thanksMessage').textContent =
