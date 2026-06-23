@@ -1,0 +1,266 @@
+/* ── Tokens ── */
+:root {
+  --bg:       #F2F2F0;
+  --surface:  #FFFFFF;
+  --text:     #111111;
+  --accent:   #FF3D00;
+  --muted:    #909090;
+  --ghost:    #E8E8E5;
+  --border:   #E0E0DC;
+  --error:    #E84040;
+  --radius:   10px;
+  --speed:    300ms ease;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+}
+
+/* ── Progress bar ── */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--ghost);
+  z-index: 100;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  width: 0%;
+  transition: width var(--speed);
+}
+
+/* ── Top bar ── */
+.top-bar {
+  position: fixed;
+  top: 3px; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 48px;
+  z-index: 99;
+}
+.logo {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+.step-counter {
+  font-size: 0.875rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ── Form container ── */
+.form-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Steps ── */
+.step {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 48px 48px;
+}
+.step.active { display: flex; }
+
+/* ── Transitions ── */
+@keyframes slideInRight  { from { transform: translateX(60px);  opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes slideInLeft   { from { transform: translateX(-60px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes slideOutLeft  { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-60px); opacity: 0; } }
+@keyframes slideOutRight { from { transform: translateX(0); opacity: 1; } to { transform: translateX(60px);  opacity: 0; } }
+
+.slide-in-forward  { animation: slideInRight  var(--speed) forwards; }
+.slide-in-backward { animation: slideInLeft   var(--speed) forwards; }
+.slide-out-forward  { animation: slideOutLeft  var(--speed) forwards; }
+.slide-out-backward { animation: slideOutRight var(--speed) forwards; }
+
+/* ── Ghost number ── */
+.ghost-number {
+  position: absolute;
+  top: 50%;
+  right: 48px;
+  transform: translateY(-50%);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 22vw;
+  color: var(--ghost);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* ── Step body ── */
+.step-body {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+}
+
+/* ── Question ── */
+.question {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 2rem;
+}
+
+/* ── Sub-label ── */
+.sub-label {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-top: -1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Text inputs ── */
+.input-group { display: flex; flex-direction: column; }
+.text-input {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem;
+  color: var(--text);
+  outline: none;
+  width: 100%;
+  max-width: 400px;
+  transition: border-color var(--speed);
+}
+.text-input:focus { border-color: var(--accent); }
+.text-input::placeholder { color: var(--muted); }
+
+/* ── Choice buttons (single-select) ── */
+.choices { display: flex; flex-wrap: wrap; gap: 12px; }
+.choice {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color var(--speed), background var(--speed), color var(--speed);
+}
+.choice:hover { border-color: var(--accent); }
+.choice.selected { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* ── Chips (multi-select) ── */
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color var(--speed), background var(--speed), color var(--speed);
+}
+.chip:hover { border-color: var(--accent); }
+.chip.selected { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* ── Nav ── */
+.step-nav {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 2.5rem;
+}
+.btn-back {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--speed);
+}
+.btn-back:hover { color: var(--text); }
+.btn-back.hidden { visibility: hidden; }
+.btn-continue {
+  background: var(--text);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 14px 28px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--speed);
+}
+.btn-continue:hover { background: var(--accent); }
+
+/* ── Shake ── */
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20%      { transform: translateX(-8px); }
+  40%      { transform: translateX(8px); }
+  60%      { transform: translateX(-6px); }
+  80%      { transform: translateX(6px); }
+}
+.error-shake { animation: shake 0.35s ease; }
+
+/* ── Thank-you screen ── */
+.thanks-body { display: flex; flex-direction: column; gap: 12px; }
+.thanks-logo {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--muted);
+}
+.thanks-headline {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 8vw, 6rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.thanks-sub {
+  font-size: 1.125rem;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .top-bar      { padding: 16px 24px; }
+  .step         { padding: 90px 24px 32px; }
+  .ghost-number { font-size: 32vw; right: 16px; }
+  .text-input   { max-width: 100%; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .progress-fill, .text-input, .choice, .chip,
+  .btn-back, .btn-continue { transition: none; }
+  .slide-in-forward, .slide-in-backward,
+  .slide-out-forward, .slide-out-backward,
+  .error-shake { animation: none; }
+}
